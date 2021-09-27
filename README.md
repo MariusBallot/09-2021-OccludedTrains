@@ -1,5 +1,5 @@
-# ✨ Vue Three Starter ✨
-A simple webgl threejs creative dev environnement in Vue.JS with GLSLify loader 👨‍💻
+# ✨ Occluded Trains ✨
+R&D For occluders and custom shaders in Three.js 👨‍💻
 
 <div style="display: flex">
     <img src="https://aws1.discourse-cdn.com/standard17/uploads/threejs/original/2X/e/e4f86d2200d2d35c30f7b1494e96b9595ebc2751.png" height="50px">
@@ -10,7 +10,8 @@ A simple webgl threejs creative dev environnement in Vue.JS with GLSLify loader 
 
 ## Project setup
 ```
-git clone https://github.com/MariusBallot/04-2021-Vue-Three-Starter.git
+git clone gh repo clone MariusBallot/09-2021-OccludedTrains
+cd ./09-2021-OccludedTrains
 npm i
 ```
 
