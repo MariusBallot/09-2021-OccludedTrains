@@ -6,11 +6,15 @@ class Exits {
     this.bind()
     this.modelLoader = new GLTFLoader()
     this.texLoader = new THREE.TextureLoader()
+    this.wallGroup = new THREE.Group()
+    this.rightWalls = new THREE.Group()
   }
 
   init(scene, params) {
     this.scene = scene
-    this.params = params.exits
+    this.params = params
+    this.scene.add(this.wallGroup, this.rightWalls)
+
     this.originGroup
 
     this.matCap = this.texLoader.load('assets/webGL/textures/blackMetalMatCap.png')
@@ -35,26 +39,28 @@ class Exits {
   }
 
   generateWalls() {
-    this.wallGroup = new THREE.Group()
-    for (let x = 0; x <= this.params.xCount; x++) {
-      for (let y = 0; y <= this.params.yCount; y++) {
+    this.wallGroup.clear()
+    for (let x = 0; x < this.params.xCount; x++) {
+      for (let y = 0; y < this.params.yCount; y++) {
         const c = this.originGroup.clone()
         const size = 2
-        const xpos = x * (size + this.params.margin) - (size + this.params.margin) * this.params.xCount / 2
-        const ypos = y * (size + this.params.margin) - (size + this.params.margin) * this.params.yCount / 2
+        const xpos = x * (size + this.params.margin) - (size + this.params.margin) * (this.params.xCount - 1) / 2
+        const ypos = y * (size + this.params.margin) - (size + this.params.margin) * (this.params.yCount - 1) / 2
         c.position.set(0, ypos, xpos)
         this.wallGroup.add(c)
       }
     }
-    const rightWalls = this.wallGroup.clone()
+
+    this.scene.remove(this.rightWalls)
+    this.rightWalls = this.wallGroup.clone()
     this.wallGroup.position.x = -this.params.space
-    rightWalls.scale.x = -1
-    rightWalls.position.x = this.params.space
-    this.scene.add(this.wallGroup, rightWalls)
+    this.rightWalls.scale.x = -1
+    this.rightWalls.position.x = this.params.space
+    this.scene.add(this.rightWalls)
   }
 
-  update() {
-
+  guiUpdate() {
+    this.generateWalls()
   }
 
   bind() {
